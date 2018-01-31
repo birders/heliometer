@@ -1,0 +1,7 @@
+[package]
+name = "heliometer"
+version = "0.1.0"
+authors = [ "LEARAX57H <willculhane3@gmail.com>",
+            "vpzomtrrfrt <eric@gloriouswill.com>" ]
+
+[dependencies]
