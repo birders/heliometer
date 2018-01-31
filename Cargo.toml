@@ -4,4 +4,12 @@ version = "0.1.0"
 authors = [ "LEARAX57H <willculhane3@gmail.com>",
             "vpzomtrrfrt <eric@gloriouswill.com>" ]
 
+[lib]
+name = "heliometer"
+path = "src/lib.rs"
+
+[[bin]]
+name = "heliometer_bin"
+path = "src/main.rs"
+
 [dependencies]
