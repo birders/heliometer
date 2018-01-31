@@ -7,6 +7,4 @@ fn main() {
 
 
   let output = execute(&input, std::io::stdin(), std::io::stdout());
-
-  // println!("{}", output.unwrap())
 }

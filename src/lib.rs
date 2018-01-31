@@ -15,8 +15,10 @@ impl Tape {
     return self.contents[index];
   }
   pub fn increment(&mut self, index: usize) {
-    //println!("incrementing {} from {}", index, self.get_cell(index));
     self.contents[index] += 1;
+  }
+  pub fn decrement(&mut self, index: usize) {
+    self.contents[index] -= 1;
   }
   pub fn new() -> Tape {
     Tape {
@@ -40,12 +42,15 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
       Some(chr) => {
         if match chr {
           &'.' => {
-            //println!("printing {}", self.tape.get_cell(self.data_index));
             self.output.write(&[self.tape.get_cell(self.data_index)]);
             Ok(true)
           },
           &'+' => {
             self.tape.increment(self.data_index);
+            Ok(true)
+          },
+          &'-' => {
+            self.tape.decrement(self.data_index);
             Ok(true)
           },
           _ => Err(Error::InvalidInstruction)
