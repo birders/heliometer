@@ -97,6 +97,7 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
             }
             else {
               // otherwise, do amazing magic loop stuff with ¡oreology!
+              let mut nested = 1;
               loop {
                 self.instruction_index += 1;
                 let chr = match self.source.get(self.instruction_index) {
@@ -104,7 +105,13 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
                   None => Err(Error::EOF)
                 }?;
                 if *chr == ']' {
-                  break;
+                  nested -= 1;
+                  if nested < 1 {
+                    break;
+                  }
+                }
+                if *chr == '[' {
+                  nested += 1;
                 }
               }
               Ok(true)
@@ -115,6 +122,7 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
               Ok(true)
             }
             else {
+              let mut nested = 1;
               loop {
                 if self.instruction_index < 1 {
                   return Err(Error::MismatchedBrackets);
@@ -122,7 +130,13 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
                 self.instruction_index -= 1;
                 let chr = self.source[self.instruction_index];
                 if chr == '[' {
-                  break;
+                  nested -= 1;
+                  if nested < 1 {
+                    break;
+                  }
+                }
+                if chr == ']' {
+                  nested += 1;
                 }
               }
               Ok(true)
