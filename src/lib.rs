@@ -53,6 +53,14 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
             self.tape.decrement(self.data_index);
             Ok(true)
           },
+          &'<' => {
+              self.data_index -= 1;
+              Ok(true)
+          },
+          &'>' => {
+              self.data_index += 1;
+              Ok(true)
+          },
           _ => Err(Error::InvalidInstruction)
         }? {
           self.instruction_index += 1;
