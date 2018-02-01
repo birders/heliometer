@@ -99,10 +99,10 @@ pub fn execute<R: std::io::Read, W: std::io::Write>(source: &str, input: R, outp
 
 
 /*
-  [ ]  >	increment the data pointer (to point to the next cell to the right).
-  [ ]  <	decrement the data pointer (to point to the next cell to the left).
+  [x]  >	increment the data pointer (to point to the next cell to the right).
+  [x]  <	decrement the data pointer (to point to the next cell to the left).
   [x]  +	increment (increase by one) the byte at the data pointer.
-  [ ]  -	decrement (decrease by one) the byte at the data pointer.
+  [x]  -	decrement (decrease by one) the byte at the data pointer.
   [x]  .	output the byte at the data pointer.
   [ ]  ,	accept one byte of input, storing its value in the byte at the data pointer.
   [ ]  [	if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
