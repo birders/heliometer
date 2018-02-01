@@ -1,7 +1,14 @@
 #[derive(Debug)]
 pub enum Error {
   MismatchedBrackets,
-  InvalidInstruction
+  IOError(std::io::Error),
+  EOF
+}
+
+impl From<std::io::Error> for Error {
+  fn from(err: std::io::Error) -> Error {
+    Error::IOError(err)
+  }
 }
 
 type CellContent = u8;
@@ -14,11 +21,24 @@ impl Tape {
   pub fn get_cell(&self, index: usize) -> CellContent {
     return self.contents[index];
   }
+  pub fn set_cell(&mut self, index: usize, value: CellContent) {
+    self.contents[index] = value;
+  }
   pub fn increment(&mut self, index: usize) {
-    self.contents[index] += 1;
+    if self.contents[index] == 255 {
+      self.contents[index] = 0;
+    }
+    else {
+      self.contents[index] += 1;
+    }
   }
   pub fn decrement(&mut self, index: usize) {
-    self.contents[index] -= 1;
+    if self.contents[index] == 0 {
+      self.contents[index] = 255;
+    }
+    else {
+      self.contents[index] -= 1;
+    }
   }
   pub fn new() -> Tape {
     Tape {
@@ -33,16 +53,26 @@ struct State<R: std::io::Read, W: std::io::Write> {
   instruction_index: usize,
   data_index: usize,
   input: R,
-  output: W
+  output: W,
+  small_buffer: [u8; 1]
 }
 
 impl<R: std::io::Read, W: std::io::Write> State<R, W> {
   fn run_single(&mut self) -> Result<bool, Error> {
     match self.source.get(self.instruction_index) {
       Some(chr) => {
-        if match chr {
+        //println!("processing {}", chr);
+        let result: Result<bool, Error> = match chr {
           &'.' => {
-            self.output.write(&[self.tape.get_cell(self.data_index)]);
+            self.output.write(&[self.tape.get_cell(self.data_index)])?;
+            Ok(true)
+          },
+          &',' => {
+            let count = self.input.read(&mut self.small_buffer)?;
+            if count < 1 {
+              return Err(Error::EOF);
+            }
+            self.tape.set_cell(self.data_index, self.small_buffer[0]);
             Ok(true)
           },
           &'+' => {
@@ -54,15 +84,53 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
             Ok(true)
           },
           &'<' => {
-              self.data_index -= 1;
-              Ok(true)
+            self.data_index -= 1;
+            Ok(true)
           },
           &'>' => {
-              self.data_index += 1;
-              Ok(true)
+            self.data_index += 1;
+            Ok(true)
           },
-          _ => Err(Error::InvalidInstruction)
-        }? {
+          &'[' => {
+            if self.tape.get_cell(self.data_index) > 0 {
+              Ok(true)
+            }
+            else {
+              // otherwise, do amazing magic loop stuff with ¡oreology!
+              loop {
+                self.instruction_index += 1;
+                let chr = match self.source.get(self.instruction_index) {
+                  Some(x) => Ok(x),
+                  None => Err(Error::EOF)
+                }?;
+                if *chr == ']' {
+                  break;
+                }
+              }
+              Ok(true)
+            }
+          },
+          &']' => {
+            if self.tape.get_cell(self.data_index) == 0 {
+              Ok(true)
+            }
+            else {
+              loop {
+                if self.instruction_index < 1 {
+                  return Err(Error::MismatchedBrackets);
+                }
+                self.instruction_index -= 1;
+                let chr = self.source[self.instruction_index];
+                if chr == '[' {
+                  break;
+                }
+              }
+              Ok(true)
+            }
+          },
+          _ => Ok(true)
+        };
+        if result? {
           self.instruction_index += 1;
         }
         Ok(true)
@@ -71,13 +139,13 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
     }
   }
   pub fn execute(&mut self) -> Result<(), Error> {
-    while true {
+    loop {
       if !self.run_single()? {
         break;
       }
     }
     //self.output.write(&[13]);
-    self.output.flush();
+    self.output.flush()?;
     Ok(())
   }
   pub fn new(src: &str, input: R, output: W) -> State<R, W> {
@@ -87,7 +155,8 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
       instruction_index: 0,
       data_index: 0,
       input,
-      output
+      output,
+      small_buffer: [0; 1]
     }
   }
 }
@@ -104,7 +173,7 @@ pub fn execute<R: std::io::Read, W: std::io::Write>(source: &str, input: R, outp
   [x]  +	increment (increase by one) the byte at the data pointer.
   [x]  -	decrement (decrease by one) the byte at the data pointer.
   [x]  .	output the byte at the data pointer.
-  [ ]  ,	accept one byte of input, storing its value in the byte at the data pointer.
-  [ ]  [	if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
-  [ ]  ]	if the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching [ command.
+  [x]  ,	accept one byte of input, storing its value in the byte at the data pointer.
+  [x]  [	if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command.
+  [x]  ]	if the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching [ command.
 */

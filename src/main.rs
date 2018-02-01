@@ -16,5 +16,5 @@ fn main() {
   let mut input = String::new();
   file.read_to_string(&mut input).unwrap();
 
-  let output = execute(&input, std::io::stdin(), std::io::stdout());
+  execute(&input, std::io::stdin(), std::io::stdout()).unwrap();
 }
