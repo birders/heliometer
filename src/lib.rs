@@ -47,17 +47,17 @@ impl Tape {
   }
 }
 
-struct State<R: std::io::Read, W: std::io::Write> {
+struct State<'s, R: std::io::Read + 's, W: std::io::Write + 's> {
   tape: Tape,
   source: Vec<char>,
   instruction_index: usize,
   data_index: usize,
-  input: R,
-  output: W,
+  input: &'s mut R,
+  output: &'s mut W,
   small_buffer: [u8; 1]
 }
 
-impl<R: std::io::Read, W: std::io::Write> State<R, W> {
+impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
   fn run_single(&mut self) -> Result<bool, Error> {
     match self.source.get(self.instruction_index) {
       Some(chr) => {
@@ -162,7 +162,7 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
     self.output.flush()?;
     Ok(())
   }
-  pub fn new(src: &str, input: R, output: W) -> State<R, W> {
+  pub fn new<'a>(src: &str, input: &'a mut R, output: &'a mut W) -> State<'a, R, W> {
     State {
       tape: Tape::new(),
       source: src.chars().collect(),
@@ -175,7 +175,7 @@ impl<R: std::io::Read, W: std::io::Write> State<R, W> {
   }
 }
 
-pub fn execute<R: std::io::Read, W: std::io::Write>(source: &str, input: R, output: W) -> Result<(), Error> {
+pub fn execute<R: std::io::Read, W: std::io::Write>(source: &str, input: &mut R, output: &mut W) -> Result<(), Error> {
   let mut state = State::new(source, input, output);
   state.execute()
 }
