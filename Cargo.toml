@@ -1,9 +1,11 @@
 [package]
 name = "heliometer"
-version = "0.2.3"
+version = "0.2.4"
+description = "A basic brainfuck interpreter"
 authors = [ "LEARAX57H <willculhane3@gmail.com>",
             "vpzomtrrfrt <eric@gloriouswill.com>" ]
 
+keywords = ["bf", "brainfuck"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/PishLSDYUE/heliometer"
