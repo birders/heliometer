@@ -1,8 +1,11 @@
 [package]
 name = "heliometer"
-version = "0.2.1"
+version = "0.2.2"
 authors = [ "LEARAX57H <willculhane3@gmail.com>",
             "vpzomtrrfrt <eric@gloriouswill.com>" ]
+
+license = "MIT"
+repository = "https://github.com/PishLSDYUE/heliometer"
 
 [lib]
 name = "heliometer"
