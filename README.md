@@ -2,6 +2,10 @@
 
 A bf interpreter written in rust.
 
-Simply run `cargo install` to install the binary, other cargo commands should work fine.
+`heliometer` is the library, `helio` is the binary.
 
-`helio <file>` will interpret the contents of <file> as bf.
+
+### Helio
+Simply run `cargo install` to install `helio` to `.cargo/bin`.
+
+`helio <file>` will interpret the contents of `<file>` as brainfuck.
