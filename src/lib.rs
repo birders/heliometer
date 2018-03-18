@@ -19,7 +19,7 @@ struct Tape {
 
 impl Tape {
   pub fn get_cell(&self, index: usize) -> CellContent {
-    return self.contents[index];
+    self.contents[index]
   }
   pub fn set_cell(&mut self, index: usize, value: CellContent) {
     self.contents[index] = value;
@@ -62,12 +62,12 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
     match self.source.get(self.instruction_index) {
       Some(chr) => {
         //println!("processing {}", chr);
-        let result: Result<bool, Error> = match chr {
-          &'.' => {
-            self.output.write(&[self.tape.get_cell(self.data_index)])?;
+        let result: Result<bool, Error> = match *chr {
+          '.' => {
+            self.output.write_all(&[self.tape.get_cell(self.data_index)])?;
             Ok(true)
           },
-          &',' => {
+          ',' => {
             let count = self.input.read(&mut self.small_buffer)?;
             if count < 1 {
               return Err(Error::EOF);
@@ -75,23 +75,23 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
             self.tape.set_cell(self.data_index, self.small_buffer[0]);
             Ok(true)
           },
-          &'+' => {
+          '+' => {
             self.tape.increment(self.data_index);
             Ok(true)
           },
-          &'-' => {
+          '-' => {
             self.tape.decrement(self.data_index);
             Ok(true)
           },
-          &'<' => {
+          '<' => {
             self.data_index -= 1;
             Ok(true)
           },
-          &'>' => {
+          '>' => {
             self.data_index += 1;
             Ok(true)
           },
-          &'[' => {
+          '[' => {
             if self.tape.get_cell(self.data_index) > 0 {
               Ok(true)
             }
@@ -117,7 +117,7 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
               Ok(true)
             }
           },
-          &']' => {
+          ']' => {
             if self.tape.get_cell(self.data_index) == 0 {
               Ok(true)
             }
