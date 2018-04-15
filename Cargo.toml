@@ -1,6 +1,6 @@
 [package]
 name = "heliometer"
-version = "0.3.2"
+version = "0.3.3"
 description = "A basic brainfuck interpreter"
 authors = [ "LEARAX57H <willculhane3@gmail.com>",
             "vpzomtrrfrt <eric@gloriouswill.com>" ]
