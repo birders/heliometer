@@ -153,15 +153,6 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
         }
     }
 
-    /// Execute a bf program
-    ///
-    /// # Examples
-    ///
-    /// ```
-    ///    let mut input = String::new();
-    ///    file.read_to_string(&mut input).unwrap();
-    ///    execute(&input, &mut std::io::stdin(), &mut std::io::stdout()).unwrap();
-    /// ```
     pub fn execute(&mut self) -> Result<(), Error> {
         loop {
             if !self.run_single()? {
@@ -173,26 +164,34 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
         Ok(())
     }
 
-    /// Create a new state
     pub fn new<'a>(src: &str, input: &'a mut R, output: &'a mut W)
         -> State<'a, R, W> {
-        State {
-            tape: Tape::new(),
-            source: src.chars().collect(),
-            instruction_index: 0,
-            data_index: 0,
-            input,
-            output,
-            small_buffer: [0; 1],
+            State {
+                tape: Tape::new(),
+                source: src.chars().collect(),
+                instruction_index: 0,
+                data_index: 0,
+                input,
+                output,
+                small_buffer: [0; 1],
+            }
         }
-    }
 }
 
+/// Execute a bf program
+///
+/// # Example
+///
+/// ```
+///    let mut input = String::new();
+///    file.read_to_string(&mut input).unwrap();
+///    execute(&input, &mut std::io::stdin(), &mut std::io::stdout()).unwrap();
+/// ```
 pub fn execute<R: std::io::Read, W: std::io::Write>(
     source: &str,
     input: &mut R,
     output: &mut W,
-) -> Result<(), Error> {
+    ) -> Result<(), Error> {
     let mut state = State::new(source, input, output);
     state.execute()
 }
