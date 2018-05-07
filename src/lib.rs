@@ -62,7 +62,9 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                 //println!("processing {}", chr);
                 let result: Result<bool, Error> = match *chr {
                     '.' => {
-                        self.output.write_all(&[self.tape.get_cell(self.data_index)])?;
+                        self.output.write_all(
+                            &[self.tape.get_cell(self.data_index)]
+                            )?;
                         Ok(true)
                     }
                     ',' => {
@@ -70,7 +72,8 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                         if count < 1 {
                             return Err(Error::EOF);
                         }
-                        self.tape.set_cell(self.data_index, self.small_buffer[0]);
+                        self.tape.set_cell(self.data_index,
+                                           self.small_buffer[0]);
                         Ok(true)
                     }
                     '+' => {
@@ -93,11 +96,12 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                         if self.tape.get_cell(self.data_index) > 0 {
                             Ok(true)
                         } else {
-                            // otherwise, do amazing magic loop stuff with ¡oreology!
                             let mut nested = 1;
                             loop {
                                 self.instruction_index += 1;
-                                let chr = match self.source.get(self.instruction_index) {
+                                let chr = match self.source.get(
+                                    self.instruction_index
+                                    ) {
                                     Some(x) => Ok(x),
                                     None => Err(Error::EOF),
                                 }?;
@@ -158,7 +162,8 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
         self.output.flush()?;
         Ok(())
     }
-    pub fn new<'a>(src: &str, input: &'a mut R, output: &'a mut W) -> State<'a, R, W> {
+    pub fn new<'a>(src: &str, input: &'a mut R, output: &'a mut W)
+        -> State<'a, R, W> {
         State {
             tape: Tape::new(),
             source: src.chars().collect(),
