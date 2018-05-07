@@ -19,7 +19,7 @@ struct Tape {
 
 impl Tape {
     pub fn get_cell(&self, index: usize) -> CellContent {
-        return self.contents[index];
+        self.contents[index]
     }
     pub fn set_cell(&mut self, index: usize, value: CellContent) {
         self.contents[index] = value;
@@ -62,7 +62,7 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                 //println!("processing {}", chr);
                 let result: Result<bool, Error> = match *chr {
                     '.' => {
-                        self.output.write(&[self.tape.get_cell(self.data_index)])?;
+                        self.output.write_all(&[self.tape.get_cell(self.data_index)])?;
                         Ok(true)
                     }
                     ',' => {
