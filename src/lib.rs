@@ -59,7 +59,6 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
     fn run_single(&mut self) -> Result<bool, Error> {
         match self.source.get(self.instruction_index) {
             Some(chr) => {
-                //println!("processing {}", chr);
                 let result: Result<bool, Error> = match *chr {
                     '.' => {
                         self.output.write_all(
@@ -159,7 +158,6 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                 break;
             }
         }
-        //self.output.write(&[13]);
         self.output.flush()?;
         Ok(())
     }
