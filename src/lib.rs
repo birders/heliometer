@@ -152,6 +152,16 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
             None => Ok(false),
         }
     }
+
+    /// Execute a bf program
+    ///
+    /// # Examples
+    ///
+    /// ```
+    ///    let mut input = String::new();
+    ///    file.read_to_string(&mut input).unwrap();
+    ///    execute(&input, &mut std::io::stdin(), &mut std::io::stdout()).unwrap();
+    /// ```
     pub fn execute(&mut self) -> Result<(), Error> {
         loop {
             if !self.run_single()? {
@@ -162,6 +172,8 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
         self.output.flush()?;
         Ok(())
     }
+
+    /// Create a new state
     pub fn new<'a>(src: &str, input: &'a mut R, output: &'a mut W)
         -> State<'a, R, W> {
         State {
