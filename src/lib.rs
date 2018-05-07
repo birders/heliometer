@@ -183,9 +183,8 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
 /// # Example
 ///
 /// ```
-///    let mut input = String::new();
-///    file.read_to_string(&mut input).unwrap();
-///    execute(&input, &mut std::io::stdin(), &mut std::io::stdout()).unwrap();
+/// let input = "+++++[->+++++ +++++<]-- .";
+/// heliometer::execute(&input, &mut std::io::stdin(), &mut std::io::stdout()).unwrap();
 /// ```
 pub fn execute<R: std::io::Read, W: std::io::Write>(
     source: &str,
