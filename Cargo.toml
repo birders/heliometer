@@ -1,6 +1,6 @@
 [package]
 name = "heliometer"
-version = "0.3.7"
+version = "0.4.0"
 description = "A basic brainfuck interpreter"
 authors = [ "LEARAX57H <willculhane3@gmail.com>",
             "vpzomtrrfrt <eric@gloriouswill.com>" ]
@@ -19,3 +19,6 @@ name = "helio"
 path = "src/main.rs"
 
 [dependencies]
+
+[dev-dependencies]
+assert_cli = "0.5.4"

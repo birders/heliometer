@@ -2,7 +2,7 @@
 pub enum Error {
     MismatchedBrackets,
     IOError(std::io::Error),
-    EOF
+    EOF,
 }
 
 impl From<std::io::Error> for Error {
@@ -61,9 +61,8 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
             Some(chr) => {
                 let result: Result<bool, Error> = match *chr {
                     '.' => {
-                        self.output.write_all(
-                            &[self.tape.get_cell(self.data_index)]
-                            )?;
+                        self.output
+                            .write_all(&[self.tape.get_cell(self.data_index)])?;
                         Ok(true)
                     }
                     ',' => {
@@ -71,8 +70,7 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                         if count < 1 {
                             return Err(Error::EOF);
                         }
-                        self.tape.set_cell(self.data_index,
-                                           self.small_buffer[0]);
+                        self.tape.set_cell(self.data_index, self.small_buffer[0]);
                         Ok(true)
                     }
                     '+' => {
@@ -98,9 +96,7 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                             let mut nested = 1;
                             loop {
                                 self.instruction_index += 1;
-                                let chr = match self.source.get(
-                                    self.instruction_index
-                                    ) {
+                                let chr = match self.source.get(self.instruction_index) {
                                     Some(x) => Ok(x),
                                     None => Err(Error::EOF),
                                 }?;
@@ -162,18 +158,17 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
         Ok(())
     }
 
-    pub fn new<'a>(src: &str, input: &'a mut R, output: &'a mut W)
-        -> State<'a, R, W> {
-            State {
-                tape: Tape::new(),
-                source: src.chars().collect(),
-                instruction_index: 0,
-                data_index: 0,
-                input,
-                output,
-                small_buffer: [0; 1],
-            }
+    pub fn new<'a>(src: &str, input: &'a mut R, output: &'a mut W) -> State<'a, R, W> {
+        State {
+            tape: Tape::new(),
+            source: src.chars().collect(),
+            instruction_index: 0,
+            data_index: 0,
+            input,
+            output,
+            small_buffer: [0; 1],
         }
+    }
 }
 
 /// Execute a bf program
@@ -188,7 +183,7 @@ pub fn execute<R: std::io::Read, W: std::io::Write>(
     source: &str,
     input: &mut R,
     output: &mut W,
-    ) -> Result<(), Error> {
+) -> Result<(), Error> {
     let mut state = State::new(source, input, output);
     state.execute()
 }
