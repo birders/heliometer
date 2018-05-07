@@ -9,7 +9,7 @@ fn main() {
 
     if args.len() != 2 {
         eprintln!("Usage: {} <file.bf>", args[0]);
-        return;
+        std::process::exit(1);
     }
 
     let mut file = std::fs::File::open(&args[1]).unwrap();
