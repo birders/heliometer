@@ -157,7 +157,7 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
     ///
     /// # Examples
     ///
-    /// ```rust
+    /// ```
     ///    let mut input = String::new();
     ///    file.read_to_string(&mut input).unwrap();
     ///    execute(&input, &mut std::io::stdin(), &mut std::io::stdout()).unwrap();
