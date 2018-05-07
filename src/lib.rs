@@ -2,7 +2,7 @@
 pub enum Error {
     MismatchedBrackets,
     IOError(std::io::Error),
-    EOF,
+    EOF
 }
 
 impl From<std::io::Error> for Error {
@@ -60,12 +60,12 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
         match self.source.get(self.instruction_index) {
             Some(chr) => {
                 //println!("processing {}", chr);
-                let result: Result<bool, Error> = match chr {
-                    &'.' => {
+                let result: Result<bool, Error> = match *chr {
+                    '.' => {
                         self.output.write(&[self.tape.get_cell(self.data_index)])?;
                         Ok(true)
                     }
-                    &',' => {
+                    ',' => {
                         let count = self.input.read(&mut self.small_buffer)?;
                         if count < 1 {
                             return Err(Error::EOF);
@@ -73,23 +73,23 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                         self.tape.set_cell(self.data_index, self.small_buffer[0]);
                         Ok(true)
                     }
-                    &'+' => {
+                    '+' => {
                         self.tape.increment(self.data_index);
                         Ok(true)
                     }
-                    &'-' => {
+                    '-' => {
                         self.tape.decrement(self.data_index);
                         Ok(true)
                     }
-                    &'<' => {
+                    '<' => {
                         self.data_index -= 1;
                         Ok(true)
                     }
-                    &'>' => {
+                    '>' => {
                         self.data_index += 1;
                         Ok(true)
                     }
-                    &'[' => {
+                    '[' => {
                         if self.tape.get_cell(self.data_index) > 0 {
                             Ok(true)
                         } else {
@@ -114,7 +114,7 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
                             Ok(true)
                         }
                     }
-                    &']' => {
+                    ']' => {
                         if self.tape.get_cell(self.data_index) == 0 {
                             Ok(true)
                         } else {
