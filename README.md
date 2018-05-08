@@ -1,5 +1,6 @@
 ## Heliometer
 [![Build Status](https://travis-ci.org/PishLSDYUE/heliometer.svg?branch=master)](https://travis-ci.org/PishLSDYUE/heliometer)
+[![Coverage Status](https://coveralls.io/repos/github/PishLSDYUE/heliometer/badge.svg?branch=master)](https://coveralls.io/github/PishLSDYUE/heliometer?branch=master)
 [![Version](https://img.shields.io/crates/v/heliometer.svg)](https://crates.io/crates/heliometer)
 [![Downloads](https://img.shields.io/crates/d/heliometer.svg)](https://crates.io/crates/heliometer)
 [![License](https://img.shields.io/crates/l/heliometer.svg)](https://crates.io/crates/heliometer)
