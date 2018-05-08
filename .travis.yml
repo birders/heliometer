@@ -13,12 +13,8 @@ addons:
     - kalakris-cmake
 rust:
 - stable
-- nightly
 - beta
-matrix:
-  allow_failures:
-  - rust: beta
-  fast_finish: true
+- nightly
 before_script:
 - export PATH=$HOME/.cargo/bin:$PATH
 - cargo install cargo-update || echo "cargo-update is already installed."
