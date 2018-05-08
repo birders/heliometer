@@ -40,7 +40,7 @@ mod tests {
     }
 
     #[test]
-    fn two_hundred_fifty_six() {
+    fn overflow() {
         let mut file = std::fs::File::open("examples/256.bf").unwrap();
         let mut input = String::new();
         file.read_to_string(&mut input).unwrap();
