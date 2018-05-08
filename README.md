@@ -1,5 +1,5 @@
 ## Heliometer
-[![Build Status](https://travis-ci.org/PishLSDYUE/heliometer.svg?branch=master)](https://travis-ci.org/PishLSDYUE/heliometer)
+[![Build Status](https://travis-ci.org/PishLSDYUE/heliometer.svg?branch=master)](https://travis-ci.org/PishLSDYUE/heliometer) [![Crates.io](https://img.shields.io/crates/v/heliometer.svg)](https://crates.io/crates/heliometer) [![Crates.io](https://img.shields.io/crates/d/heliometer.svg)](https://crates.io/crates/heliometer) [![Crates.io](https://img.shields.io/crates/l/heliometer.svg)](https://crates.io/crates/heliometer)
 
 A bf interpreter written in rust.
 
