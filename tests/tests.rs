@@ -33,7 +33,7 @@ mod tests {
         let mut file = std::fs::File::open("examples/far_right.bf").unwrap();
         let mut input = String::new();
         file.read_to_string(&mut input).unwrap();
-        let mut fake_input  = std::io::Cursor::new(vec![0; 1]);
+        let mut fake_input = std::io::Cursor::new(vec![0; 1]);
         let mut fake_output = std::io::Cursor::new(vec![0; 1]);
         heliometer::execute(&input, &mut fake_input, &mut fake_output).unwrap();
         assert_eq!(&fake_output.get_ref()[0], &b'#');
@@ -44,19 +44,18 @@ mod tests {
         let mut file = std::fs::File::open("examples/256.bf").unwrap();
         let mut input = String::new();
         file.read_to_string(&mut input).unwrap();
-        let mut fake_input  = std::io::Cursor::new(vec![0; 1]);
+        let mut fake_input = std::io::Cursor::new(vec![0; 1]);
         let mut fake_output = std::io::Cursor::new(vec![0; 1]);
         heliometer::execute(&input, &mut fake_input, &mut fake_output).unwrap();
         assert_eq!(&fake_output.get_ref()[0], &0);
     }
-
 
     #[test]
     fn bubble_sort() {
         let mut file = std::fs::File::open("examples/bsort.bf").unwrap();
         let mut input = String::new();
         file.read_to_string(&mut input).unwrap();
-        let mut fake_input  = std::io::Cursor::new(vec![50, 20, 19, 255, 19, 4, 103, 57, 0, 53]);
+        let mut fake_input = std::io::Cursor::new(vec![50, 20, 19, 255, 19, 4, 103, 57, 0, 53]);
         let mut fake_output = std::io::Cursor::new(vec![0; 10]);
         let expected_output = std::io::Cursor::new(vec![4, 19, 19, 20, 50, 57, 103, 255, 0, 0]);
         heliometer::execute(&input, &mut fake_input, &mut fake_output).unwrap();
