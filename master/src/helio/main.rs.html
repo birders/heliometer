@@ -10,11 +10,10 @@
     <title>main.rs.html -- source</title>
 
     <link rel="stylesheet" type="text/css" href="../../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../../rustdoc.css"
-          id="mainThemeStyle">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle">
     
     <link rel="stylesheet" type="text/css" href="../../dark.css">
-    <link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle">
+    <link rel="stylesheet" type="text/css" href="../../main.css" id="themeStyle">
     <script src="../../storage.js"></script>
     
 
@@ -83,7 +82,7 @@
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">Read</span>;
 
-    <span class="kw">let</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">env</span>::<span class="ident">args</span>().<span class="ident">collect</span>();
+    <span class="kw">let</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">env</span>::<span class="ident">args</span>().<span class="ident">collect</span>();
 
     <span class="kw">if</span> <span class="ident">args</span>.<span class="ident">len</span>() <span class="op">!=</span> <span class="number">2</span> {
         <span class="macro">eprintln</span><span class="macro">!</span>(<span class="string">&quot;Usage: {} &lt;file.bf&gt;&quot;</span>, <span class="ident">args</span>[<span class="number">0</span>]);
