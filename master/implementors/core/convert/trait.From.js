@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["heliometer"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/convert/trait.From.html\" title=\"trait core::convert::From\">From</a>&lt;<a class=\"struct\" href=\"https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html\" title=\"struct std::io::error::Error\">Error</a>&gt; for <a class=\"enum\" href=\"heliometer/enum.Error.html\" title=\"enum heliometer::Error\">Error</a>",];
+implementors["heliometer"] = [{text:"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/convert/trait.From.html\" title=\"trait core::convert::From\">From</a>&lt;<a class=\"struct\" href=\"https://doc.rust-lang.org/nightly/std/io/error/struct.Error.html\" title=\"struct std::io::error::Error\">Error</a>&gt; for <a class=\"enum\" href=\"heliometer/enum.Error.html\" title=\"enum heliometer::Error\">Error</a>",synthetic:false,types:["heliometer::Error"]},];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);
