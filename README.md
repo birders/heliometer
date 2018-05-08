@@ -1,4 +1,5 @@
 ## Heliometer
+[![Build Status](https://travis-ci.org/PishLSDYUE/heliometer.svg?branch=master)](https://travis-ci.org/PishLSDYUE/heliometer)
 
 A bf interpreter written in rust.
 
