@@ -14,8 +14,10 @@ mod integration {
         assert_cli::Assert::main_binary()
             .fails()
             .and()
-            .stderr().contains(INVALID_USAGE_OUTPUT_1)
-            .stderr().contains(INVALID_USAGE_OUTPUT_2)
+            .stderr()
+            .contains(INVALID_USAGE_OUTPUT_1)
+            .stderr()
+            .contains(INVALID_USAGE_OUTPUT_2)
             .unwrap();
     }
 }
