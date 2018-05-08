@@ -121,7 +121,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "heliometer"
-version = "0.4.6"
+version = "0.4.7"
 dependencies = [
  "assert_cli 0.5.4 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
