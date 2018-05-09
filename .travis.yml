@@ -14,10 +14,10 @@ matrix:
     - rust: nightly
       before_script:
         - rustup component add rustfmt-preview
-        - cargo install clippy || echo "clippy is already installed."
+        # - cargo install clippy || echo "clippy is already installed."
       script:
         - cargo fmt -- --write-mode=diff
-        - cargo clippy -- -D clippy
+        # - cargo clippy -- -D clippy
 addons:
   apt:
     packages:
