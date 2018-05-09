@@ -5,9 +5,9 @@
 [![Downloads](https://img.shields.io/crates/d/heliometer.svg)](https://crates.io/crates/heliometer)
 [![License](https://img.shields.io/crates/l/heliometer.svg)](https://crates.io/crates/heliometer)
 
-A brainfuck interpreter written in rust.
+A Brainfuck interpreter written in Rust.
 
-Heliometer can read and execute brainfuck programs from a file, or it can be
+Heliometer can read and execute Brainfuck programs from a file, or it can be
 used as a library. See the [documentation](https://pishlsdyue.github.io/heliometer/master/heliometer/)
 for details.
 
@@ -15,4 +15,5 @@ for details.
 ### Binary Installation
 Simply run `cargo install` to install `helio` to `.cargo/bin`.
 
-`helio <file>` will interpret the contents of `<file>` as brainfuck.
+`helio <file>` will interpret the contents of `<file>` as Brainfuck, using
+stdin and stdout for input and output respectively.
