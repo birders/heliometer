@@ -171,7 +171,7 @@ impl<'s, R: std::io::Read, W: std::io::Write> State<'s, R, W> {
     }
 }
 
-/// Execute a bf program
+/// Execute a brainfuck program
 ///
 /// # Example
 ///
