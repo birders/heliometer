@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Error",""]],"fn":[["execute","Execute a bf program"]]});
+initSidebarItems({"enum":[["Error",""]],"fn":[["execute","Execute a brainfuck program"]]});
