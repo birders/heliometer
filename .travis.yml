@@ -1,43 +1,40 @@
 sudo: required
 language: rust
 rust:
-  - stable
-  - beta
-  - nightly
+ - stable
+ - beta
+ - nightly
 cache: cargo
 env:
   global:
-    # Github pages token
-    secure: RUnyzJAKXY/3fUs27tjXoZ38h/KSaYgC2tOcvgAqXwe7vH4gTfSmzYfDWKcocVqJlT/2/oI76u8SNKJnZ4xgyJ/kNCTOiG68lIf16K+m8UzjI+SCl4m/rkJ/oVZ24Rc41ZdNyIzb1wn4/ML0aXVmHXSijYF83WWFRNgXLELn9QYlxNJZjjyP5I0LRMOkU3pcMyIrcsnXs7bnz+jtMzsr8x2ov1EV7SESgLFoNh0djVKufJT0BOP1ky4zPZe+aXbhQSB43LxDM/rVaMK6Kxp+XNXcF/gOtdICvXK9HS0EF9Va2sMAjcoxQTXNjC6caGINRrZUbadtmMG+VF2nyd2GsUI0WZMrCs86EIU0DEJlAHHgNUdpN885OL7mHslsnJtuhOYWOUtmLbjUgOh5GKHMPcMKEGuC2ea1HfcVqBb/nqbUfTfDwL2QRmZ2x7XcZJaSF9/NU/no0hOQm41sEfXxSV1ChJz1GwPc0vV4wRr7nC2GboXf10Vd3w6h+rotUmJvL0et2L+l7hkFfPy476OWF4RttLi0mfKayfoBh89mxO34WVI0jYxPYKLtq7EQCbg/myevsn/4DV+sgSOfhs4ZPdneZSzzeL3g9/kc9Xz+7SweF3BypLGAHDJtS+vAtxeNGPsusZ04SIZAdxRnGTMMoS+GTedO2MN5AL1qFuUHbN4=
+   - secure: qikNsOJWrTN3/gopYiSXmA3ytTsQc48qbxs5ILWmQGF+SvfH0bFIvoR3HMTw2pMcRDrtBrur0BzX4LE92fYL4HU1KkNJ0ywA70SLOJlhetxTaahKwRpaQDP9wtdCcogyFa+TuqKtIXHSTGYgJwc5nJMxec9g7IK06g+9slfHnO67Fk7LzPs86ffZuGYV8S1cSYGslmpkb49UkyyrVxjKn379k1YcGH/wb/vqzi3XLgnpBUONfKUceKSlb7nPiAAqyzpbe+a9gJ9JfZPl9R/W1OhL9Q1RwDSDy5v6iqmO1E/O53Wj5P/PBTvIyWefKDaZS84Ue+N1CTarOnR+zvBWIt9NtE8FsuU2Ve7zzrD534MvuABOezLGX5dU9VFjo37SX6Jk9gyi1P87UJfkv1RCTrLp6w+3v42AH1T4XAEzeVxJDx0NM1XlsJaq4xo+Kiie9l+zizZGsBBWP87XC8+1hcz+2iZa0SzhUWK6kfUQh82pCdntvJaKbRyrHHDijbxtFDwsUnLEBUuxwg5pffYoYrnqzOTjAZEoCg6qPkmKvsiSe51Q/pxtGW5VFJ8awzdQNr+LZuOvWv1O6Hvs5ODIBQuifg2xS1DjfE+WKrmwqkoXacJtq7OZlQXE4r9r2TPLw7Q7JVHYqqaytxHQAZWGMG40cOkUIHVW7bZBIOK2vc8=
 matrix:
   include:
-    - rust: nightly
-      before_script:
-        - rustup component add rustfmt-preview
-        # - cargo install clippy || echo "clippy is already installed."
-      script:
-        - cargo fmt -- --write-mode=diff
-        # - cargo clippy -- -D clippy
+   - rust: nightly
+    before_script:
+     - rustup component add rustfmt-preview
+    script:
+     - cargo fmt -- --write-mode=diff
 addons:
   apt:
     packages:
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
-      - binutils-dev
-      - cmake
+     - libcurl4-openssl-dev
+     - libelf-dev
+     - libdw-dev
+     - binutils-dev
+     - cmake
     sources:
-      - kalakris-cmake
+     - kalakris-cmake
 before_script:
-  - export PATH=$HOME/.cargo/bin:$PATH
-  - cargo install cargo-update || echo "cargo-update is already installed."
-  - cargo install cargo-travis || echo "cargo-travis is already installed."
-  - cargo install-update -a
+ - export PATH=$HOME/.cargo/bin:$PATH
+ - cargo install cargo-update || echo "cargo-update is already installed."
+ - cargo install cargo-travis || echo "cargo-travis is already installed."
+ - cargo install-update -a
 script:
-  - cargo build
-  - cargo doc
-  - cargo test
-  - cargo bench
+ - cargo build
+ - cargo doc
+ - cargo test
+ - cargo bench
 after_success:
-  - cargo coveralls
-  - cargo doc-upload
+ - cargo coveralls
+ - cargo doc-upload
