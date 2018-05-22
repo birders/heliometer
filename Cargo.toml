@@ -1,6 +1,6 @@
 [package]
 name = "heliometer"
-version = "0.5.7"
+version = "0.5.8"
 description = "A basic Brainfuck interpreter"
 authors = [ "LEARAX57H <willculhane3@gmail.com>",
             "vpzomtrrfrt <eric@gloriouswill.com>" ]
@@ -13,6 +13,7 @@ documentation = "https://pishlsdyue.github.io/heliometer/master/heliometer/"
 
 [badges]
 travis-ci = { repository = "PishLSDYUE/heliometer" }
+coveralls = { repository = "PishLSDYUE/heliometer" }
 
 [lib]
 name = "heliometer"
