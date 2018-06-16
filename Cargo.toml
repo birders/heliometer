@@ -1,6 +1,6 @@
 [package]
 name = "heliometer"
-version = "0.5.8"
+version = "0.5.9"
 description = "A basic Brainfuck interpreter"
 authors = [ "LEARAX57H <willculhane3@gmail.com>",
             "vpzomtrrfrt <eric@gloriouswill.com>" ]
@@ -8,12 +8,12 @@ authors = [ "LEARAX57H <willculhane3@gmail.com>",
 keywords = ["bf", "brainfuck"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/PishLSDYUE/heliometer"
-documentation = "https://pishlsdyue.github.io/heliometer/master/heliometer/"
+repository = "https://github.com/birders/heliometer"
+documentation = "https://birders.github.io/heliometer/master/heliometer/"
 
 [badges]
-travis-ci = { repository = "PishLSDYUE/heliometer" }
-coveralls = { repository = "PishLSDYUE/heliometer" }
+travis-ci = { repository = "birders/heliometer" }
+coveralls = { repository = "birders/heliometer" }
 
 [lib]
 name = "heliometer"

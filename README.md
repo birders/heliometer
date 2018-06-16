@@ -1,6 +1,6 @@
 ## Heliometer
-[![Build Status](https://travis-ci.org/PishLSDYUE/heliometer.svg?branch=master)](https://travis-ci.org/PishLSDYUE/heliometer)
-[![Coverage Status](https://coveralls.io/repos/github/PishLSDYUE/heliometer/badge.svg?branch=master&service=github)](https://coveralls.io/github/PishLSDYUE/heliometer?branch=master)
+[![Build Status](https://travis-ci.org/birders/heliometer.svg?branch=master)](https://travis-ci.org/birders/heliometer)
+[![Coverage Status](https://coveralls.io/repos/github/birders/heliometer/badge.svg?branch=master&service=github)](https://coveralls.io/github/birders/heliometer?branch=master)
 [![Version](https://img.shields.io/crates/v/heliometer.svg)](https://crates.io/crates/heliometer)
 [![Downloads](https://img.shields.io/crates/d/heliometer.svg)](https://crates.io/crates/heliometer)
 [![License](https://img.shields.io/crates/l/heliometer.svg)](https://crates.io/crates/heliometer)
@@ -8,7 +8,7 @@
 A Brainfuck interpreter written in Rust.
 
 Heliometer can read and execute Brainfuck programs from a file, or it can be
-used as a library. See the [documentation](https://pishlsdyue.github.io/heliometer/master/heliometer/)
+used as a library. See the [documentation](https://birders.github.io/heliometer/master/heliometer/)
 for details.
 
 
